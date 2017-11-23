@@ -23,6 +23,11 @@
 		380014891F92A1E500A346F6 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380014881F92A1E400A346F6 /* MainViewController.m */; };
 		3800148D1F92A89B00A346F6 /* CategoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3800148C1F92A89A00A346F6 /* CategoryCell.m */; };
 		380014901F92A8B500A346F6 /* POICell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3800148F1F92A8B500A346F6 /* POICell.m */; };
+		387885CB1FC74F6A001CC281 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885CA1FC74F6A001CC281 /* Category.m */; };
+		387885CE1FC74FB2001CC281 /* Poi.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885CD1FC74FB2001CC281 /* Poi.m */; };
+		387885D11FC74FE6001CC281 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D01FC74FE6001CC281 /* User.m */; };
+		387885D41FC754BD001CC281 /* NSObject+GetDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D21FC754BC001CC281 /* NSObject+GetDictionary.m */; };
+		387885D71FC756DE001CC281 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D61FC756DE001CC281 /* JSONParser.m */; };
 		38C54F531F92AFD0003A2F19 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C54F521F92AFD0003A2F19 /* FavoritesViewController.m */; };
 		38C54F561F92B16B003A2F19 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C54F541F92B16A003A2F19 /* ParentViewController.m */; };
 		38C54F581F92B30D003A2F19 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C54F571F92B30D003A2F19 /* MapKit.framework */; };
@@ -74,6 +79,16 @@
 		3800148C1F92A89A00A346F6 /* CategoryCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCell.m; sourceTree = "<group>"; };
 		3800148E1F92A8B500A346F6 /* POICell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POICell.h; sourceTree = "<group>"; };
 		3800148F1F92A8B500A346F6 /* POICell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POICell.m; sourceTree = "<group>"; };
+		387885C91FC74F6A001CC281 /* Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Category.h; sourceTree = "<group>"; };
+		387885CA1FC74F6A001CC281 /* Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Category.m; sourceTree = "<group>"; };
+		387885CC1FC74FB2001CC281 /* Poi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Poi.h; sourceTree = "<group>"; };
+		387885CD1FC74FB2001CC281 /* Poi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Poi.m; sourceTree = "<group>"; };
+		387885CF1FC74FE6001CC281 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		387885D01FC74FE6001CC281 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		387885D21FC754BC001CC281 /* NSObject+GetDictionary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GetDictionary.m"; sourceTree = "<group>"; };
+		387885D31FC754BD001CC281 /* NSObject+GetDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+GetDictionary.h"; sourceTree = "<group>"; };
+		387885D51FC756DE001CC281 /* JSONParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
+		387885D61FC756DE001CC281 /* JSONParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSONParser.m; sourceTree = "<group>"; };
 		38C54F511F92AFD0003A2F19 /* FavoritesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		38C54F521F92AFD0003A2F19 /* FavoritesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		38C54F541F92B16A003A2F19 /* ParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
@@ -194,6 +209,8 @@
 				380014681F9296F800A346F6 /* NetworkManager.m */,
 				380014641F9296E000A346F6 /* PropertyUtil.h */,
 				380014651F9296E000A346F6 /* PropertyUtil.m */,
+				387885D51FC756DE001CC281 /* JSONParser.h */,
+				387885D61FC756DE001CC281 /* JSONParser.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -203,6 +220,12 @@
 			children = (
 				38C54F6C1F92B8D0003A2F19 /* ErrorMessage.h */,
 				38C54F6B1F92B8D0003A2F19 /* ErrorMessage.m */,
+				387885C91FC74F6A001CC281 /* Category.h */,
+				387885CA1FC74F6A001CC281 /* Category.m */,
+				387885CC1FC74FB2001CC281 /* Poi.h */,
+				387885CD1FC74FB2001CC281 /* Poi.m */,
+				387885CF1FC74FE6001CC281 /* User.h */,
+				387885D01FC74FE6001CC281 /* User.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -210,6 +233,8 @@
 		3800146C1F92970B00A346F6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				387885D31FC754BD001CC281 /* NSObject+GetDictionary.h */,
+				387885D21FC754BC001CC281 /* NSObject+GetDictionary.m */,
 				38C54F5B1F92B78A003A2F19 /* UIView+Shadow.h */,
 				38C54F5C1F92B78A003A2F19 /* UIView+Shadow.m */,
 				3800146D1F92971C00A346F6 /* UIViewController+Alerts.h */,
@@ -362,14 +387,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				387885D11FC74FE6001CC281 /* User.m in Sources */,
+				387885CE1FC74FB2001CC281 /* Poi.m in Sources */,
 				38C54F6D1F92B8E9003A2F19 /* ErrorMessage.m in Sources */,
 				38C54F661F92B81C003A2F19 /* AccessTokenManager.m in Sources */,
+				387885D41FC754BD001CC281 /* NSObject+GetDictionary.m in Sources */,
 				38C54F671F92B81C003A2F19 /* NetworkManager.m in Sources */,
 				38C54F681F92B81C003A2F19 /* PropertyUtil.m in Sources */,
 				38C54F621F92B80E003A2F19 /* ShadowView.m in Sources */,
 				38C54F631F92B80E003A2F19 /* CenterAlignedImageButton.m in Sources */,
 				38C54F641F92B80E003A2F19 /* UIView+Shadow.m in Sources */,
 				38C54F651F92B80E003A2F19 /* UIViewController+Alerts.m in Sources */,
+				387885CB1FC74F6A001CC281 /* Category.m in Sources */,
 				380014891F92A1E500A346F6 /* MainViewController.m in Sources */,
 				3800147A1F92990F00A346F6 /* CategoryViewController.m in Sources */,
 				38C54F561F92B16B003A2F19 /* ParentViewController.m in Sources */,
@@ -381,6 +410,7 @@
 				380014801F92992700A346F6 /* POIDetailViewController.m in Sources */,
 				3800148D1F92A89B00A346F6 /* CategoryCell.m in Sources */,
 				3800145B1F92900000A346F6 /* main.m in Sources */,
+				387885D71FC756DE001CC281 /* JSONParser.m in Sources */,
 				380014901F92A8B500A346F6 /* POICell.m in Sources */,
 				380014531F92900000A346F6 /* POIapp.xcdatamodeld in Sources */,
 				380014771F9298D700A346F6 /* RegistrationViewController.m in Sources */,

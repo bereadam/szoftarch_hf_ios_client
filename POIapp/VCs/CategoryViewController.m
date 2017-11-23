@@ -9,9 +9,12 @@
 #import "CategoryViewController.h"
 #import "CategoryCell.h"
 #import "MainViewController.h"
+#import "NetworkManager.h"
+#import "PoiListViewController.h"
 
 @interface CategoryViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property NSArray<Category*>* categories;
 
 @end
 
@@ -20,6 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (!self.category) {
+        [self getCategories];
+    }
+    else{
+        self.categories = self.category.subCategories;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,12 +39,13 @@
 #pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 20;
+    return self.categories.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     CategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"categoryCell"];
-    cell.nameLabel.text = @"Category";
+    Category* cat = self.categories [indexPath.row];
+    cell.nameLabel.text = cat.name;
     return cell;
 }
 
@@ -49,10 +59,40 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UIViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiListVC"];
-    [self.navigationController pushViewController:VC animated:true];
-    [((MainViewController*)self.navigationController.parentViewController) setBackActive:true];
+    Category* cat = self.categories [indexPath.row];
+    [self getCategoryById:cat.id];
+    
+}
+
+-(void)getCategories{
+    [[NetworkManager new] getCategoriesWithSuccessBlock:^(NSArray<Category *> *result) {
+        self.categories = result;
+        [self.tableView reloadData];
+    } errorBlock:^(ErrorMessage *error) {
+        
+    }];
+}
+
+-(void)getCategoryById:(NSNumber*)ID{
+    [[NetworkManager new] getDetailedCategory:ID successBlock:^(Category *result) {
+        if(result.subCategories.count){
+            UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+            CategoryViewController* VC = [sb instantiateViewControllerWithIdentifier:@"categoryVC"];
+            VC.category = result;
+            [self.navigationController pushViewController:VC animated:true];
+        }
+        else{
+            UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+            PoiListViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiListVC"];
+            VC.pois = result.pois;
+            VC.search = false;
+            [self.navigationController pushViewController:VC animated:true];
+        }
+        
+        [((MainViewController*)self.navigationController.parentViewController) setBackActive:true];
+    } errorBlock:^(ErrorMessage *error) {
+        
+    }];
 }
 
 @end

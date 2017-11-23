@@ -123,10 +123,12 @@ static const char *getPropertyType(objc_property_t property) {
             const char *propType = getPropertyType(property);
             NSString *propertyName = [NSString stringWithUTF8String:propName];
             NSString *propertyType = [NSString stringWithUTF8String:propType];
-            NSObject* value =[dic objectForKey:propertyName];
-            BOOL assignable =[value isKindOfClass:NSClassFromString(propertyType)];
-            if (value && assignable){
-                [object setValue:value forKey:propertyName];
+            if ([dic respondsToSelector:@selector(objectForKey:)]) {
+                NSObject* value =[dic objectForKey:propertyName];
+                BOOL assignable =[value isKindOfClass:NSClassFromString(propertyType)];
+                if (value && assignable){
+                    [object setValue:value forKey:propertyName];
+                }
             }
         }
     }

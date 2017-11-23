@@ -13,6 +13,7 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.tintColor = self.tintColor;
 }
 
 /*

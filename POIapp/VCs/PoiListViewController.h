@@ -7,7 +7,12 @@
 //
 
 #import "ParentViewController.h"
+#import "Poi.h"
 
 @interface PoiListViewController : ParentViewController
+
+@property NSArray<Poi*>* pois;
+-(void)reloadTableView;
+@property BOOL search;
 
 @end

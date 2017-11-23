@@ -7,9 +7,12 @@
 //
 
 #import "FavoritesViewController.h"
+#import "NetworkManager.h"
+#import "PoiListViewController.h"
 
 @interface FavoritesViewController ()
 @property UINavigationController* myNavigationController;
+
 @end
 
 @implementation FavoritesViewController
@@ -19,6 +22,7 @@
     if (self.childViewControllers.count) {
         self.myNavigationController = self.childViewControllers.firstObject;
     }
+    [self getFavorites];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,14 +38,16 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)getFavorites{
+    [[NetworkManager new] getFavoritesWithSuccessBlock:^(NSArray<Poi *> *result) {
+        PoiListViewController* VC = (PoiListViewController*)self.myNavigationController.viewControllers.firstObject;
+        VC.pois = result;
+        VC.search = false;
+        [VC reloadTableView];
+    } errorBlock:^(ErrorMessage *error) {
+        
+    }];
 }
-*/
+
 
 @end

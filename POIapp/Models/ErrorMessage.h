@@ -11,7 +11,6 @@
 @interface ErrorMessage : NSObject
 
 @property NSString* message;
-@property NSNumber* errorCode;
-@property NSArray* alreadyInvitedFriends;
+@property NSNumber* code;
 
 @end

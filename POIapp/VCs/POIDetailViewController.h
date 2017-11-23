@@ -7,7 +7,10 @@
 //
 
 #import "ParentViewController.h"
+#import "Poi.h"
 
 @interface POIDetailViewController : ParentViewController
+
+@property Poi* poi;
 
 @end

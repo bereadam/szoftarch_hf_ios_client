@@ -7,8 +7,12 @@
 //
 
 #import "RegistrationViewController.h"
+#import "NetworkManager.h"
 
 @interface RegistrationViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passTextField;
+@property User* user;
 
 @end
 
@@ -17,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.user = [User new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,22 +30,24 @@
 }
 
 - (IBAction)regTapped:(id)sender {
-    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UIViewController* VC = [sb instantiateViewControllerWithIdentifier:@"mainVC"];
-    [self.navigationController pushViewController:VC animated:true];
+    if (self.emailTextField.text.length && self.passTextField.text.length) {
+        self.user.email = self.emailTextField.text;
+        self.user.password = self.passTextField.text;
+        [self registerUser];
+    }
 }
 - (IBAction)backTapped:(id)sender {
     [self.navigationController popViewControllerAnimated:true];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)registerUser{
+    [[NetworkManager new] registerUser:self.user successBlock:^(id result) {
+        UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        UIViewController* VC = [sb instantiateViewControllerWithIdentifier:@"mainVC"];
+        [self.navigationController pushViewController:VC animated:true];
+    } errorBlock:^(ErrorMessage *error) {
+        
+    }];
 }
-*/
 
 @end

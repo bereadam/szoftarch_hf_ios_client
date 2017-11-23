@@ -7,7 +7,10 @@
 //
 
 #import "ParentViewController.h"
+#import "Category.h"
 
 @interface CategoryViewController : ParentViewController
+
+@property Category* category;
 
 @end

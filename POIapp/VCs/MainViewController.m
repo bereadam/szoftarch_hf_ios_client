@@ -7,11 +7,14 @@
 //
 
 #import "MainViewController.h"
+#import "NetworkManager.h"
+#import "PoiListViewController.h"
 
 @interface MainViewController ()
 
 @property UINavigationController* myNavigationController;
 @property (weak, nonatomic) IBOutlet UIView *backView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @end
 
@@ -37,6 +40,9 @@
 }
 
 - (IBAction)searchTapped:(id)sender {
+    if (self.searchTextField.text.length) {
+        [self sendSearch];
+    }
 }
 
 - (IBAction)favorieTapped:(id)sender {
@@ -46,21 +52,50 @@
 }
 
 - (IBAction)logoutTapped:(id)sender {
-    [self.navigationController popViewControllerAnimated:true];
+    [self logout];
 }
 
 -(void)setBackActive:(BOOL)active{
     self.backView.hidden = !active;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)navigateToPoiList:(NSArray<Poi*>*)pois{
+    UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    PoiListViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiListVC"];
+    VC.pois = pois;
+    VC.search = true;
+    [self.myNavigationController pushViewController:VC animated:true];
 }
-*/
+
+#pragma mark - Networking
+
+-(void)sendSearch{
+    [[NetworkManager new] searchPoi:self.searchTextField.text successBlock:^(NSArray<Poi *> *result) {
+        if ([self.myNavigationController.viewControllers.lastObject isKindOfClass:[PoiListViewController class]]) {
+            PoiListViewController* VC = self.myNavigationController.viewControllers.lastObject;
+            if (VC.search) {
+                VC.pois = result;
+                [VC reloadTableView];
+            }
+            else{
+                [self navigateToPoiList:result];
+            }
+        }
+        else{
+            [self navigateToPoiList:result];
+        }
+        [self setBackActive:true];
+    } errorBlock:^(ErrorMessage *error) {
+        
+    }];
+}
+
+-(void)logout{
+    [[NetworkManager new] logoutWithSuccessBlock:^(id result) {
+        [self.navigationController popToRootViewControllerAnimated:true];
+    } errorBlock:^(ErrorMessage *error) {
+        [self.navigationController popToRootViewControllerAnimated:true];
+    }];
+}
 
 @end

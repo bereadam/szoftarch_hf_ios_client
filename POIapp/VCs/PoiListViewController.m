@@ -8,6 +8,7 @@
 
 #import "PoiListViewController.h"
 #import "POICell.h"
+#import "POIDetailViewController.h"
 
 @interface PoiListViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -25,14 +26,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)reloadTableView{
+    [self.tableView reloadData];
+}
+
 #pragma mark - UITableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 50;
+    return self.pois.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     POICell *cell = [tableView dequeueReusableCellWithIdentifier:@"poiCell"];
+    Poi* p = self.pois[indexPath.row];
+    cell.nameLabel.text = p.name;
+    cell.distanceLabel.text = [[p.distance stringValue] stringByAppendingString:@"m"];
+    
     return cell;
 }
 
@@ -46,8 +55,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:true];
+    Poi* p = self.pois[indexPath.row];
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UIViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiDetailVC"];
+    POIDetailViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiDetailVC"];
+    VC.poi = p;
     [self.navigationController pushViewController:VC animated:true];
 }
 
