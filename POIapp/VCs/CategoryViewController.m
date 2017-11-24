@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "NetworkManager.h"
 #import "PoiListViewController.h"
+#import "PoiDistanceManager.h"
 
 @interface CategoryViewController () <UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -35,6 +36,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - UITableView
 
@@ -64,6 +66,8 @@
     
 }
 
+#pragma mark - Networking
+
 -(void)getCategories{
     [[NetworkManager new] getCategoriesWithSuccessBlock:^(NSArray<Category *> *result) {
         self.categories = result;
@@ -84,7 +88,7 @@
         else{
             UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
             PoiListViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiListVC"];
-            VC.pois = result.pois;
+            VC.pois = [[PoiDistanceManager new] calculateDistancAndSortPois:result.pois currentLocation:((ParentViewController*)self.navigationController.parentViewController).currentLocation];
             VC.search = false;
             [self.navigationController pushViewController:VC animated:true];
         }

@@ -40,7 +40,12 @@
     POICell *cell = [tableView dequeueReusableCellWithIdentifier:@"poiCell"];
     Poi* p = self.pois[indexPath.row];
     cell.nameLabel.text = p.name;
-    cell.distanceLabel.text = [[p.distance stringValue] stringByAppendingString:@"m"];
+    if (p.distance.integerValue>2000) {
+        cell.distanceLabel.text=[NSString stringWithFormat:@"%0.1f km",p.distance.doubleValue/1000];
+    }
+    else{
+        cell.distanceLabel.text=[NSString stringWithFormat:@"%li m",(long)p.distance.integerValue];
+    }
     
     return cell;
 }

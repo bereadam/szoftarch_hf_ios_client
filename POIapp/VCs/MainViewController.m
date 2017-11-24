@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "NetworkManager.h"
 #import "PoiListViewController.h"
+#import "PoiDistanceManager.h"
+#import "FavoritesViewController.h"
 
 @interface MainViewController ()
 
@@ -26,6 +28,7 @@
         self.myNavigationController = self.childViewControllers.firstObject;
     }
     self.backView.hidden = true;
+    [self setupLocationManager];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +50,8 @@
 
 - (IBAction)favorieTapped:(id)sender {
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    UIViewController* VC = [sb instantiateViewControllerWithIdentifier:@"favVC"];
+    FavoritesViewController* VC = [sb instantiateViewControllerWithIdentifier:@"favVC"];
+    VC.currentLoc = self. currentLocation;
     [self.navigationController pushViewController:VC animated:true];
 }
 
@@ -62,7 +66,7 @@
 -(void)navigateToPoiList:(NSArray<Poi*>*)pois{
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     PoiListViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiListVC"];
-    VC.pois = pois;
+    VC.pois = [[PoiDistanceManager new] calculateDistancAndSortPois:pois currentLocation:self.currentLocation];
     VC.search = true;
     [self.myNavigationController pushViewController:VC animated:true];
 }

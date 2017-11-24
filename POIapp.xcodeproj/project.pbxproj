@@ -28,6 +28,7 @@
 		387885D11FC74FE6001CC281 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D01FC74FE6001CC281 /* User.m */; };
 		387885D41FC754BD001CC281 /* NSObject+GetDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D21FC754BC001CC281 /* NSObject+GetDictionary.m */; };
 		387885D71FC756DE001CC281 /* JSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D61FC756DE001CC281 /* JSONParser.m */; };
+		387885DA1FC79DC0001CC281 /* PoiDistanceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 387885D91FC79DC0001CC281 /* PoiDistanceManager.m */; };
 		38C54F531F92AFD0003A2F19 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C54F521F92AFD0003A2F19 /* FavoritesViewController.m */; };
 		38C54F561F92B16B003A2F19 /* ParentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C54F541F92B16A003A2F19 /* ParentViewController.m */; };
 		38C54F581F92B30D003A2F19 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C54F571F92B30D003A2F19 /* MapKit.framework */; };
@@ -89,6 +90,8 @@
 		387885D31FC754BD001CC281 /* NSObject+GetDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+GetDictionary.h"; sourceTree = "<group>"; };
 		387885D51FC756DE001CC281 /* JSONParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
 		387885D61FC756DE001CC281 /* JSONParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSONParser.m; sourceTree = "<group>"; };
+		387885D81FC79DC0001CC281 /* PoiDistanceManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoiDistanceManager.h; sourceTree = "<group>"; };
+		387885D91FC79DC0001CC281 /* PoiDistanceManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PoiDistanceManager.m; sourceTree = "<group>"; };
 		38C54F511F92AFD0003A2F19 /* FavoritesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		38C54F521F92AFD0003A2F19 /* FavoritesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		38C54F541F92B16A003A2F19 /* ParentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParentViewController.m; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 				380014651F9296E000A346F6 /* PropertyUtil.m */,
 				387885D51FC756DE001CC281 /* JSONParser.h */,
 				387885D61FC756DE001CC281 /* JSONParser.m */,
+				387885D81FC79DC0001CC281 /* PoiDistanceManager.h */,
+				387885D91FC79DC0001CC281 /* PoiDistanceManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -300,6 +305,11 @@
 					380014441F92900000A346F6 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -400,6 +410,7 @@
 				38C54F651F92B80E003A2F19 /* UIViewController+Alerts.m in Sources */,
 				387885CB1FC74F6A001CC281 /* Category.m in Sources */,
 				380014891F92A1E500A346F6 /* MainViewController.m in Sources */,
+				387885DA1FC79DC0001CC281 /* PoiDistanceManager.m in Sources */,
 				3800147A1F92990F00A346F6 /* CategoryViewController.m in Sources */,
 				38C54F561F92B16B003A2F19 /* ParentViewController.m in Sources */,
 				38C54F531F92AFD0003A2F19 /* FavoritesViewController.m in Sources */,

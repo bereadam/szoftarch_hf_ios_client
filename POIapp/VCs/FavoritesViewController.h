@@ -7,8 +7,10 @@
 //
 
 #import "ParentViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface FavoritesViewController : ParentViewController
 
+@property CLLocationCoordinate2D currentLoc;
 
 @end

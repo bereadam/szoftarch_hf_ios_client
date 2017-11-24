@@ -31,7 +31,12 @@
     }
     
     self.titleLabel.text = self.poi.name;
-    self.distanceLabel.text = [[self.poi.distance stringValue] stringByAppendingString:@"m"];
+    if (self.poi.distance.integerValue>2000) {
+        self.distanceLabel.text=[NSString stringWithFormat:@"%0.1f km",self.poi.distance.doubleValue/1000];
+    }
+    else{
+        self.distanceLabel.text=[NSString stringWithFormat:@"%li m",(long)self.poi.distance.integerValue];
+    }
     self.descTextView.text = self.poi.desc;
     if (self.inFavorites) {
         [self.favButton setImage:[UIImage imageNamed:@"like"] forState:UIControlStateNormal];

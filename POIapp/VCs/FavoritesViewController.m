@@ -9,6 +9,7 @@
 #import "FavoritesViewController.h"
 #import "NetworkManager.h"
 #import "PoiListViewController.h"
+#import "PoiDistanceManager.h"
 
 @interface FavoritesViewController ()
 @property UINavigationController* myNavigationController;
@@ -41,7 +42,7 @@
 -(void)getFavorites{
     [[NetworkManager new] getFavoritesWithSuccessBlock:^(NSArray<Poi *> *result) {
         PoiListViewController* VC = (PoiListViewController*)self.myNavigationController.viewControllers.firstObject;
-        VC.pois = result;
+        VC.pois = [[PoiDistanceManager new] calculateDistancAndSortPois:result currentLocation:self.currentLoc];
         VC.search = false;
         [VC reloadTableView];
     } errorBlock:^(ErrorMessage *error) {

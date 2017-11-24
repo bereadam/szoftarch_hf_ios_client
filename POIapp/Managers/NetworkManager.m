@@ -50,7 +50,7 @@ static NSString* const categoryDetailsUrl = @"categorydetails/%@";
 
 -(void)registerUser:(User*)user successBlock:(void (^)(id result))successBlock errorBlock:(void (^)(ErrorMessage *error))errorBlock{
     [self sendPostRequestWithMethodName:regiserUrl andJSON:[user getDictionary] andToken:nil successBlock:^(id result) {
-        [AccessTokenManager saveAccessToken:result[@"sessionID"]];
+        [AccessTokenManager saveAccessToken:result[@"sessionId"]];
         successBlock(result);
     } errorBlock:^(ErrorMessage *error) {
         errorBlock(error);

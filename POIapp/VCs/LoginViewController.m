@@ -43,8 +43,10 @@
         UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         UIViewController* VC = [sb instantiateViewControllerWithIdentifier:@"mainVC"];
         [self.navigationController pushViewController:VC animated:true];
+        [self.pasTextField resignFirstResponder];
+        [self.emailTextField resignFirstResponder];
     } errorBlock:^(ErrorMessage *error) {
-        
+        [self showAlertWithTitle:@"Login error" andMessage:@""];
     }];
 }
 
