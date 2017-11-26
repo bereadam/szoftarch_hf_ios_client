@@ -67,6 +67,7 @@
     UIStoryboard* sb = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     PoiListViewController* VC = [sb instantiateViewControllerWithIdentifier:@"poiListVC"];
     VC.pois = [[PoiDistanceManager new] calculateDistancAndSortPois:pois currentLocation:self.currentLocation];
+    VC.currentLocation = self.currentLocation;
     VC.search = true;
     [self.myNavigationController pushViewController:VC animated:true];
 }
@@ -78,7 +79,7 @@
         if ([self.myNavigationController.viewControllers.lastObject isKindOfClass:[PoiListViewController class]]) {
             PoiListViewController* VC = self.myNavigationController.viewControllers.lastObject;
             if (VC.search) {
-                VC.pois = result;
+                VC.pois =  [[PoiDistanceManager new] calculateDistancAndSortPois:result currentLocation:self.currentLocation];
                 [VC reloadTableView];
             }
             else{
